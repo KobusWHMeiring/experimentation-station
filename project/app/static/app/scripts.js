@@ -43,6 +43,30 @@ function sendUserMessage(prompt_content, model){
     $.ajax(config);
 }
 
+function handleKeyDown(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        send();
+    }
+}
+
+function displayResponseMessage(input){
+    /* todo change to bot messages */
+    console.log('input', input)
+    let newMessage = document.createElement("p");
+    newMessage.classList.add("user-message");
+    newMessage.innerHTML = input.answer;
+    console.log('newMessage', newMessage)
+
+    let messageContainer = document.createElement("div");
+    messageContainer.classList.add("user-message-container")
+    messageContainer.appendChild(newMessage);
+    console.log('messageContainer', messageContainer)
+
+    let output = document.getElementById("output");
+    console.log('output', output)
+    output.appendChild(messageContainer);
+}
 
 function displayUserMessage(userMessage){
    
