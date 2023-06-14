@@ -1,0 +1,54 @@
+{%load static%}
+
+
+<link rel="stylesheet" href="{% static 'app/styles.css' %}">
+<script src="{% static 'app/scripts.js' %}" type="text/javascript"></script>
+<script src="{% static 'app/jquery.js' %}" type="text/javascript"></script>
+
+
+<body>
+    <div class='headercontainer' id='headercontainer'>
+        <div class='header' id='header'>
+            <div class='left-item'></div>
+            <div class='logo'></div>
+            <div class='right-item'></div>
+        </div>
+    </div>
+    <div class='activity-container'>
+        <div class='action-container'>
+            <div class='output-space'>
+                <div class='output' id='output'></div>
+            </div>
+            <div class='settings-space'>
+                <div class='models-container'>
+                    <div class = 'model-type-container'>
+                        <label for="model-type">Model Type:</label>
+                        <select id="model-type" name="model-type">
+                             <option value="classification">Classification</option>
+                             <option value="question-answer">Question-Answer</option>
+                             <option value="summarizer">Summarizer</option>
+                             <option value="translator">Translator</option>
+                        </select>
+                    </div>
+                    <div class = 'question-answer-container hidden' id = 'question-answer-container'>
+                        <label for="question-answer">Model Name:</label>
+                        <select id="question-answer" name="question-answer">
+                             <option value="gpt3.5">GPT3.5</option>
+                             <option value="gpt4">GPT4</option>
+                             <option value="flant5">FlanT5</option>
+                             <option value="tbc">TBC</option>
+                        </select>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class='input-space'>
+                <div class='input-bar-container'>
+                    <textarea class='input' id='input'></textarea>
+                    <button class='send-button' onclick="send()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
