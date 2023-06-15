@@ -4,21 +4,33 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 
-def chat3turbo(prompt):
-    print("request")
-    print(prompt)
+def chat3turbo(prompt, transcript):
     user = prompt['user_message']
     system = prompt['system_message']
-    print("user message")
+    print("user message in openai.py")
     print(user)
-    print("chat3turbo ran")
+    print("system message in chat3turbo")
+    print(system)
+    
+    transcript_string = ""
+    for message in transcript:
+        role = message['role']
+        content = message['content']
+        transcript_string += f"{role}: {content}\n"
+    print(transcript_string)
+    
+    if len(transcript) >1:
+        prescript = "You've been having the following conversation with the user: " + transcript_string + " this is the user's next question: "
+        user = prescript + user
+        print("longer transcript.  New prompt: ")
+        print(user)
     
     completion = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages=[
+        model="gpt-3.5-turbo",
+        messages=[
         {"role": "user", "content": user},
         {"role": "system", "content": system}
-    ]  
+        ]  
     )
     
     response = completion.choices[0].message.content

@@ -9,27 +9,29 @@ document.addEventListener("DOMContentLoaded", function() {
       });
 })
 
-function send(){
-    let prompt_content = document.getElementById("input").value
-    let model_type = document.getElementById("model-type").value
-    let model = "gpt3.5"
-    if(model_type == "question-answer"){
-        model = document.getElementById("question-answer").value
+function handleKeyDown(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        send();
     }
-
-    
-    document.getElementById("input").value = ""
-    console.log('prompt_content', prompt_content)
-    displayUserMessage(prompt_content)
-    response = sendUserMessage(prompt_content, model)
 }
+var inputTextArea = document.getElementById('input');
+inputTextArea.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.key == 'Enter') {
+        send();
+    }
+});
+
+
 
 function sendUserMessage(prompt_content, model){
 
+    displaySettings(model)
     let content = 
         {
             "prompt": prompt_content,
-            "model": model
+            "model": model,
+            "guid": guid,
         }
     let config = 
         {
@@ -42,19 +44,38 @@ function sendUserMessage(prompt_content, model){
         
     $.ajax(config);
 }
-
-function handleKeyDown(event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        send();
+function send(){
+    console.log('guid in send', guid)
+    let prompt_content = document.getElementById("input").value
+    let model_type = document.getElementById("model-type").value
+    let model = "gpt3.5"
+    if(model_type == "question-answer"){
+        model = document.getElementById("question-answer").value
     }
+
+    
+    document.getElementById("input").value = ""
+    console.log('prompt_content', prompt_content)
+    displayUserMessage(prompt_content)
+    response = sendUserMessage(prompt_content, model, guid)
+}
+
+function displaySettings(model){
+    model = "Selected Model: " + model
+    let settings = document.createElement('div')
+    settings.classList.add("settings-output")
+    settings.innerHTML = model
+    let settingsContainer = document.createElement('div')
+    settingsContainer.classList.add("settings-output-container")
+    settingsContainer.appendChild(settings)
+    document.getElementById("output").appendChild(settingsContainer)
 }
 
 function displayResponseMessage(input){
-    /* todo change to bot messages */
+    
     console.log('input', input)
     let newMessage = document.createElement("p");
-    newMessage.classList.add("user-message");
+    newMessage.classList.add("response-message");
     newMessage.innerHTML = input.answer;
     console.log('newMessage', newMessage)
 
