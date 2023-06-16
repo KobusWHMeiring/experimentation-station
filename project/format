@@ -75,4 +75,34 @@
         "gazette_date": "0 DECEMBER 2004",
         "is_ammendment": null
       }
+
+    
   
+        {
+          "section": 4,
+          "body": "No person shall without the prior approval in writing of the local authority in question, erect any building in respect of which plans and specifications are to be drawn and submitted in terms of this Act.",
+          "title": "Approval by local authorities of applications in respect of erection of buildings",
+          "number": 4
+        },
+        {
+          "section": 5,
+          "body": "Subject to the provisions of subsection (3) a local authority shall appoint a person as building control officer in order to exercise and perform the powers, duties or activities granted or assigned to a building control officer by or under this Act.",
+          "title": "Appointment of building control officer by local authority",
+          "number": 5
+        },
+        {
+            "sections": [
+              {
+                "section": 4,
+                "title": "approval by local authorities of applications in respect of erection of buildings (Section 4(1): Decision cases)",
+                "number": 1,
+                "body": "No person shall without the prior approval in writing of the local authority in question, erect any building in respect of which plans and specifications are to be drawn and submitted in terms of this Act.\n\nAny application for approval referred to in subsection (1) shall be in writing on a form made available for that purpose by the local authority in question.\n\nAny application referred to in subsection (2) shall -\n(a) contain the name and address of the applicant and, if the applicant is not the owner of the land on which the building in question is to be erected, of the owner of such land;\n(b) be accompanied by such plans, specifications, documents and information as may be required by or under this Act, and by such particulars as may be required by the local authority in question for the carrying out of the objects and purposes of this Act.\n\nAny person erecting any building in contravention of the provisions of subsection (1) shall be guilty of an offence and liable on conviction to a fine not exceeding R100 for each day on which he was engaged in so erecting such building."
+              },
+              {
+                "section": 5,
+                "title": "Appointment of building control officer by local authority (Section 5(1): Decision cases)",
+                "number": 2,
+                "body": "Subject to the provisions of subsection (3) a local authority shall appoint a person as building control officer in order to exercise and perform the powers, duties or activities granted or assigned to a building control officer by or under this Act.\n\nAny person not having the qualifications prescribed by national building regulation in respect of a building control officer shall not without the approval in writing of the Minister be appointed as building control officer in terms of subsection (1).\n\nSubsection (1) shall also be construed so as to enable -\n(a) two or more than two local authorities to appoint, on such conditions as they may agree to, one person as building control officer for all such local authorities;\n(b) a local authority from time to time to appoint a person temporarily as building control officer;\n(c) a local authority, with the approval in writing of any other local authority and on such conditions as they may agree to, to make use of the services of any person appointed as building control officer by such other local authority.\n\nAny person who -\n(a) immediately before the date of commencement of this Act was employed by a local authority in order to perform as controlling officer any activities substantially the same as the activities referred to in section 6(1); and\n(b) on such date is still so employed, shall be deemed to have been appointed in terms of this section as building control officer by such local authority."
+              }
+            ]
+          }

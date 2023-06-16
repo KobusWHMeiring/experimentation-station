@@ -29,7 +29,7 @@ inputTextArea.addEventListener('keydown', function(event) {
 
 
 function sendUserMessage(prompt_content,system_prompt, model, template){
-
+  
     displaySettings(model)
     let content = 
         {
@@ -37,6 +37,7 @@ function sendUserMessage(prompt_content,system_prompt, model, template){
             "system_prompt": system_prompt,
             "model": model,
             "guid": guid,
+            "template": template,
         }
     let config = 
         {
@@ -52,6 +53,7 @@ function sendUserMessage(prompt_content,system_prompt, model, template){
 function send(){
     let prompt_content = document.getElementById("input").value
     let system_message = document.getElementById("system-input").value
+    console.log('system_message', system_message)
     let model_type = document.getElementById("model-type").value
     let template = document.getElementById("template").value
     let model = "gpt3.5"

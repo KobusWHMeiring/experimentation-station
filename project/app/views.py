@@ -18,7 +18,7 @@ def home(request):
 @csrf_exempt
 def prompt(request):
     prompt = request.POST.get('prompt', None)
-    system_message =  request.POST.get('system_message', "")
+    system_message =  request.POST.get('system_prompt', "")
     model = request.POST.get('model', None)
     guid = request.POST.get('guid', None)
     template = request.POST.get('template', None)
@@ -32,8 +32,6 @@ def prompt(request):
     managedata.add_message(guid, prompt, role, model)
     
     answer = transformerhub.get_answer(prompt, model, transcript, template)
-    print("answer in views")
-    print(answer)
     role = "System"
     prompt = {"user_message":answer,"system_message":"NA"}
     managedata.add_message(guid, prompt, role, model)
