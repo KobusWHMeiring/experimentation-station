@@ -13,9 +13,11 @@ let guid = "{{guid}}"
 <body>
     <div class='headercontainer' id='headercontainer'>
         <div class='header' id='header'>
-            <div class='left-item'></div>
-            <h1 class='logo'>
-                NLP Powertools
+            <div class='left-item'>
+                <img src ="{% static 'app/nlp-logo.png'%}" class = "logo"/>
+            </div>
+            <h1 class='title'>
+                NLP Multi-Tools
             </h1>
             <div class='right-item'></div>
         </div>
@@ -27,16 +29,17 @@ let guid = "{{guid}}"
             </div>
             <div class='settings-space'>
                 <div class='models-container'>
+
                     <div class = 'model-type-container'>
                         <label for="model-type">Model Type:</label>
                         <select id="model-type" name="model-type">
-                             <option value="classification">Classification</option>
                              <option value="question-answer">Question-Answer</option>
+                             <option value="classification">Classification</option>
                              <option value="summarizer">Summarizer</option>
                              <option value="translator">Translator</option>
                         </select>
                     </div>
-                    <div class = 'question-answer-container hidden' id = 'question-answer-container'>
+                    <div class = 'question-answer-container' id = 'question-answer-container'>
                         <label for="question-answer">Model Name:</label>
                         <select id="question-answer" name="question-answer">
                              <option value="gpt3.5">GPT3.5</option>
@@ -45,12 +48,24 @@ let guid = "{{guid}}"
                              <option value="tbc">TBC</option>
                         </select>
                     </div>
+
+                    <div class = 'templates-container' id = 'templates-container'>
+                        <label for="template">Template:</label>
+                        <select id="template" name="template">
+                             <option value="free-questions">Standard Question</option>
+                             <option value="legislation-parse">Legislation Parse</option>
+                        </select>
+                    </div>
                     
                 </div>
             </div>
             <div class='input-space'>
                 <div class='input-bar-container'>
-                    <textarea class='input' id='input'></textarea>
+                    <div class = inputs>
+                        <textarea class='system-input' id='system-input' placeholder="System Prompt">Your job is to translate legislation into JSon format.</textarea>
+                        <textarea class='input' id='input' placeholder="Prompt"></textarea>
+                    </div>
+                    
                     <button class='send-button' onclick="send()">Send</button>
                 </div>
             </div>

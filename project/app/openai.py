@@ -5,6 +5,8 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def chat3turbo(prompt, transcript):
+    print("prompt in chat3turbo")
+    print(prompt)
     user = prompt['user_message']
     system = prompt['system_message']
     print("user message in openai.py")
@@ -26,7 +28,7 @@ def chat3turbo(prompt, transcript):
         print(user)
     
     completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-3.5-turbo-16k-0613",
         messages=[
         {"role": "user", "content": user},
         {"role": "system", "content": system}
@@ -39,7 +41,10 @@ def chat3turbo(prompt, transcript):
     
     return response
 
-def chat4(user, system, transcript):
+def chat4(prompt, transcript):
+    user = prompt['user_message']
+    system = prompt['system_message']
+    
     transcript_string = ""
     for message in transcript:
         role = message['role']
@@ -63,5 +68,7 @@ def chat4(user, system, transcript):
     ]  
     )
     
-    response = completion.choices[0].message
+    response = completion.choices[0].message.content
+    print("response in gpt4")
+    print(response)
     return response

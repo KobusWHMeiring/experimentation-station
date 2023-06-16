@@ -3,8 +3,12 @@ document.addEventListener("DOMContentLoaded", function() {
     dropdown.addEventListener("change", function() {
         if (dropdown.value === "question-answer") {
           document.getElementById("question-answer-container").classList.remove("hidden")
+          document.getElementById("system-input").classList.remove("hidden")
+          document.getElementById("templates-container").classList.remove("hidden")
         } else {
             document.getElementById("question-answer-container").classList.add("hidden")
+            document.getElementById("system-input").classList.add("hidden")
+            document.getElementById("templates-container").classList.add("hidden")
         }
       });
 })
@@ -24,12 +28,13 @@ inputTextArea.addEventListener('keydown', function(event) {
 
 
 
-function sendUserMessage(prompt_content, model){
+function sendUserMessage(prompt_content,system_prompt, model, template){
 
     displaySettings(model)
     let content = 
         {
             "prompt": prompt_content,
+            "system_prompt": system_prompt,
             "model": model,
             "guid": guid,
         }
@@ -45,9 +50,10 @@ function sendUserMessage(prompt_content, model){
     $.ajax(config);
 }
 function send(){
-    console.log('guid in send', guid)
     let prompt_content = document.getElementById("input").value
+    let system_message = document.getElementById("system-input").value
     let model_type = document.getElementById("model-type").value
+    let template = document.getElementById("template").value
     let model = "gpt3.5"
     if(model_type == "question-answer"){
         model = document.getElementById("question-answer").value
@@ -57,7 +63,7 @@ function send(){
     document.getElementById("input").value = ""
     console.log('prompt_content', prompt_content)
     displayUserMessage(prompt_content)
-    response = sendUserMessage(prompt_content, model, guid)
+    response = sendUserMessage(prompt_content, system_message, model, template)
 }
 
 function displaySettings(model){
