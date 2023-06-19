@@ -157,3 +157,7 @@ body{
     height: 55px;
     width: 55px;
 }
+
+.sentiment-analysis-container{
+    padding: 5px;
+}

@@ -27,11 +27,15 @@ def prompt(request):
     
     role = "User"
     
-    prompt = {"user_message":prompt,"system_message":system_message}
+    if system_message:
+        prompt = {"user_message":prompt,"system_message":system_message}
+    else: 
+        prompt = {"user_message":prompt}
    
     managedata.add_message(guid, prompt, role, model)
     
     answer = transformerhub.get_answer(prompt, model, transcript, template)
+    
     role = "System"
     prompt = {"user_message":answer,"system_message":"NA"}
     managedata.add_message(guid, prompt, role, model)

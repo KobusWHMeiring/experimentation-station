@@ -4,11 +4,20 @@ document.addEventListener("DOMContentLoaded", function() {
         if (dropdown.value === "question-answer") {
           document.getElementById("question-answer-container").classList.remove("hidden")
           document.getElementById("system-input").classList.remove("hidden")
-          document.getElementById("templates-container").classList.remove("hidden")
-        } else {
+          document.getElementById("templates-container").classList.remove("hidden") 
+          document.getElementById("sentiment-analysis-container").classList.add("hidden")
+        }
+        else if(dropdown.value === "sentiment-analysis"){
             document.getElementById("question-answer-container").classList.add("hidden")
             document.getElementById("system-input").classList.add("hidden")
             document.getElementById("templates-container").classList.add("hidden")
+            document.getElementById("sentiment-analysis-container").classList.remove("hidden")
+        }
+        else {
+            document.getElementById("question-answer-container").classList.add("hidden")
+            document.getElementById("system-input").classList.add("hidden")
+            document.getElementById("templates-container").classList.add("hidden")
+            document.getElementById("sentiment-analysis-container").classList.add("hidden")
         }
       });
 })
@@ -59,6 +68,9 @@ function send(){
     let model = "gpt3.5"
     if(model_type == "question-answer"){
         model = document.getElementById("question-answer").value
+    }
+    else if(model_type === "sentiment-analysis"){
+        model = document.getElementById("sentiment-analysis").value
     }
 
     

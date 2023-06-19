@@ -12,6 +12,7 @@ def initialise():
 
 
 def add_message(guid, prompt, role, model):
+    
     session = Session.objects.get(guid = guid)
     content = prompt['user_message']
     

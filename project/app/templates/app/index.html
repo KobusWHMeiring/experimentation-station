@@ -34,7 +34,7 @@ let guid = "{{guid}}"
                         <label for="model-type">Model Type:</label>
                         <select id="model-type" name="model-type">
                              <option value="question-answer">Question-Answer</option>
-                             <option value="classification">Classification</option>
+                             <option value="sentiment-analysis">Sentiment Analysis</option>
                              <option value="summarizer">Summarizer</option>
                              <option value="translator">Translator</option>
                         </select>
@@ -46,6 +46,13 @@ let guid = "{{guid}}"
                              <option value="gpt4">GPT4</option>
                              <option value="flant5">FlanT5</option>
                              <option value="tbc">TBC</option>
+                        </select>
+                    </div>
+                    <div class = 'sentiment-analysis-container hidden' id = 'sentiment-analysis-container'>
+                        <label for="sentiment-analysis">Model Name:</label>
+                        <select id="sentiment-analysis" name="sentiment-analysis">
+                             <option value="DistilBERT-base">DistilBERT base</option>
+                             <option value="tbc">Request Another Model</option>
                         </select>
                     </div>
 
