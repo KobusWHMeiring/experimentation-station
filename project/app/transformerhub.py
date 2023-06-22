@@ -2,14 +2,14 @@ from app import openai, prompts, classification
 
 
 def get_answer(prompt, model, transcript, template):
-    print("prompt in get-answer")
-    print(prompt)
+    
     answer = "nothing in transformerhub"
+    
     if template == "legislation-parse":
         print("template triggered")
         pre_prompt = prompts.legislation_prompt
-        print(pre_prompt)
         prompt['user_message'] = pre_prompt + prompt['user_message']
+        prompt['system_message'] = prompts.legislation_system_prompt
     
     if model == "DistilBERT-base":
         print("sentiment")

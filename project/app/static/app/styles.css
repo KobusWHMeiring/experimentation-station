@@ -99,6 +99,7 @@ body{
     color: white;
     display: flex;
     justify-content: end;
+    flex-direction: column;
 }
 
 .settings-output{
@@ -122,6 +123,8 @@ body{
     padding: 8px;
     color: white;
     justify-content: end;
+    display: flex;
+    flex-direction: column;
 }
 
 .hidden{
