@@ -59,10 +59,37 @@ function sendUserMessage(prompt_content,system_prompt, model, template){
         
     $.ajax(config);
 }
+
+function sendWhatsapp(message){
+
+    data = {
+        "message":message,
+    }
+    let config = 
+        {
+            type: "POST",
+            url:  '/whatsapp/',
+            data: data,
+            dataType: 'json',
+            success: displayResponseMessage
+        };
+        
+    $.ajax(config);
+}
+
 function send(){
     let prompt_content = document.getElementById("input").value
     let system_message = document.getElementById("system-input").value
-    console.log('system_message', system_message)
+    const radioButtons = document.querySelectorAll('input[name="format"]');
+    let format;
+            for (const radioButton of radioButtons) {
+                if (radioButton.checked) {
+                    format = radioButton.value;
+                    break;
+                }}
+
+    console.log('format', format)
+
     let model_type = document.getElementById("model-type").value
     let template = document.getElementById("template").value
     let model = "gpt3.5"
@@ -77,7 +104,13 @@ function send(){
     document.getElementById("input").value = ""
     console.log('prompt_content', prompt_content)
     displayUserMessage(prompt_content)
-    response = sendUserMessage(prompt_content, system_message, model, template)
+
+    if (format == "whatsapp"){
+        response = sendWhatsapp(prompt_content)
+    }
+    else{
+        response = sendUserMessage(prompt_content, system_message, model, template)
+    }   
 }
 
 function displaySettings(model){

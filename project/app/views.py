@@ -2,7 +2,7 @@ from django.shortcuts import render
 from app import transformerhub
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
-from app import managedata
+from app import managedata, whatsapp
 from app.models import Messages, Session
 # Create your views here.
 
@@ -13,6 +13,23 @@ def home(request):
         "guid": session.guid
         }
     return render(request, "app/index.html", context)
+
+@csrf_exempt
+def send_whatsapp(request):
+    
+    message = request.POST.get('message', "Hello World")
+    print("message in the view")
+    print(message)
+    """ await whatsapp.send_message(message) """
+    whatsapp.non_async_send(message)
+    print("response in the view")
+   
+    back = {"status": "ge-send"}
+    
+    return(HttpResponse("yoyo"))
+    
+    
+    
 
 
 @csrf_exempt
