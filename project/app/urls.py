@@ -4,5 +4,6 @@ from app import views
 urlpatterns = [
     path('', views.home, name = "home"), 
     path('prompt/', views.prompt, name = "prompt"), 
-    path('whatsapp/', views.send_whatsapp, name = "whatsapp")
+    path('whatsapp/', views.send_whatsapp, name = "whatsapp"),
+    path('receive-whatsapp/', views.receive_whatsapp, name = "receive")
 ]

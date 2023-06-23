@@ -109,10 +109,22 @@ body{
     background-color:#633A1C ;
 }
 
+.status-indicator{
+    padding: 8px;
+    color: #e3e9eb;
+    border-radius: 8px;
+    background-color:#1c5f63 ;
+}
+
 .templates-container{
     padding: 5px
 }
 
+.status-indicator-container{
+    display: flex;
+    justify-content: start;
+    padding: 13px;
+}
 .settings-output-container{
     display: flex;
     justify-content: center;
