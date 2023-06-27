@@ -38,3 +38,32 @@ class Messages(models.Model):
                 messages.append({"role": "user", "content": message.content})
         
         return messages
+
+
+class Chat(models.Model):
+    
+    chat_id = models.CharField(max_length=400)
+    time_stamp = models.DateTimeField(auto_now_add=True)
+    cell = models.CharField(max_length=30)
+    
+    def __str__(self):
+        return self.cell
+    
+class ChatMessages(models.Model):
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
+    prompt = models.TextField(null=True)
+    content = models.TextField()
+    role = models.CharField(max_length=50)
+    time_stamp = models.DateTimeField(auto_now_add=True)
+    
+    def transcript(self):
+        messages = []
+        related_messages = ChatMessages.objects.filter(session=self).order_by('time_stamp')
+        
+        for message in related_messages:
+            if message.role == 'system':
+                messages.append({"role": "system", "content": message.content})
+            else:
+                messages.append({"role": "user", "content": message.content})
+        
+        return messages

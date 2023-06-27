@@ -24,30 +24,21 @@ def receive_whatsapp(request):
             entry = payload['entry'][0]
             changes = entry['changes'][0]
             value = changes['value']
-            """ print(entry)
-            print(changes) """
-            print(value)
-            
-            
-            
             if 'messages' in value:
                 messages = value['messages']
                 if messages:
                     text_body = messages[0]['text']['body']
                     conversation_id = messages[0]['id']
-                    print(text_body) 
-                    print(conversation_id)
-                    response = teamhelper.firstMessage(text_body, conversation_id)
+                    response = teamhelper.convoHelper(text_body, conversation_id)
                     send_whatsapp(response)
             else:
-                print("No messages found in the payload.")   
+                print("No messages found in the payload.")  
+                print(payload) 
+                id_value = value['statuses'][0]['id']
+                print(id_value)
         except (KeyError, IndexError) as e:
             print(f"Error accessing payload: {e}")
     payload = json.loads(request.body.decode('utf-8'))
-    
-    
-    
-    
     
     if request.method == 'GET':
         verify_token = 'thetokenforverification'  # Set your verify token here
@@ -71,11 +62,10 @@ def send_whatsapp(request):
     
     """ message = request.POST.get('message', "Hello World") """
     message = request
-    print("message in the view")
-    print(message)
+
     """ await whatsapp.send_message(message) """
     whatsapp.non_async_send(message)
-    print("response in the view")
+    
    
     back = {"status": "ge-send"}
     

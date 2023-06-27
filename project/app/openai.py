@@ -30,10 +30,9 @@ def chat3turbo(prompt, transcript):
         {"role": "system", "content": system}
         ]  
     )
-    print('completion done')
+
     response = completion.choices[0].message.content
-    print("response")
-    print(response)
+    
     
     return response
 
