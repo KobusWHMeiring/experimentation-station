@@ -34,6 +34,10 @@ body{
     margin-top: 55px;
     border-radius: 5px;
 }
+
+.output-frame{
+    padding: 10px
+}
 .settings-space{
     width: 89%;
     height: 8%;
@@ -174,5 +178,10 @@ body{
 }
 
 .sentiment-analysis-container{
+    padding: 5px;
+}
+
+
+.whatsapp-web{
     padding: 5px;
 }

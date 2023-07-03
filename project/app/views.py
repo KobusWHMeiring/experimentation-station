@@ -22,6 +22,7 @@ def receive_whatsapp(request):
         payload = json.loads(request.body.decode('utf-8'))
         try:
             entry = payload['entry'][0]
+            print(payload)
             changes = entry['changes'][0]
             value = changes['value']
             if 'messages' in value:
