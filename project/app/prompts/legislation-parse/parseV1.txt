@@ -1,3 +1,31 @@
-You are tasked with formatting a legal act into JSON format. Please convert the following legal act into JSON format according to the specified structure:
+You are tasked with formatting a legal act into JSON format. 
+
+The JSON structure should adhere to the following format:
+Don't add any Json formats that aren't in the example below. Don't change the text of the legislation.
+
+Comments about the format will be in <comment> tags
+{
+    "parts": [
+        {
+            "title": ["title_of_part"] <comment>"default" if there are no parts<comment>
+            "number": [part_number] <comment>0 if there are no parts<comment>,
+            "chapters": [
+                {
+                    "title": ["title_of_chapter"] <comment>"default" if there are no chapters. Don't include the chapter number in the title<comment>
+                    "number": [chapter_number] <comment>0 if there are no chapters<comment>,
+                    "sections": [
+                        {
+                            "title": [title of the section],
+                            "number": [number of the section],
+                            "body": [body text of the section]
+                        }
+                        (repeat for each section)
+                    ]
+                }
+                (repeat for each chapter)
+            ]
+        }
+    ]
+}
 
 Legal Act:

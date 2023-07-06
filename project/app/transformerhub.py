@@ -8,6 +8,7 @@ def get_answer(prompt, model, transcript, template):
     if template == "legislation-parse":
         print("template triggered")
         pre_prompt = prompts.legislation_prompt
+        
         prompt['user_message'] = pre_prompt + prompt['user_message']
         prompt['system_message'] = prompts.legislation_system_prompt
     
@@ -19,6 +20,7 @@ def get_answer(prompt, model, transcript, template):
         
     if model == "gpt3.5":
         answer = openai.chat3turbo(prompt, transcript)
+        print(answer)
     
     if model == "gpt4":
         answer = openai.chat4(prompt, transcript)

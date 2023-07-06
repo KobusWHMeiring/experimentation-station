@@ -148,7 +148,7 @@ function displayResponseStatus(){
 function displayResponseMessage(input){
     
     console.log('input', input)
-    let newMessage = document.createElement("p");
+    let newMessage = document.createElement("pre");
     newMessage.classList.add("response-message");
     newMessage.innerHTML = input.answer;
     console.log('newMessage', newMessage)
