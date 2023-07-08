@@ -104,7 +104,7 @@ function send(){
     displayUserMessage(prompt_content)
 
     if (format == "whatsapp"){
-        console.log('whatsapp iff triggered')
+        console.log('whatsapp if triggered')
         response = sendWhatsapp(prompt_content)
     }
     else{

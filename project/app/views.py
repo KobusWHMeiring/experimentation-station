@@ -78,10 +78,13 @@ def send_whatsapp(request):
 
 @csrf_exempt
 def prompt(request):
+    #whatever the user asked
     prompt = request.POST.get('prompt', None)
+    #This field is always there Question-answer, not present for other prompt types.
     system_message =  request.POST.get('system_prompt', "")
     model = request.POST.get('model', None)
     guid = request.POST.get('guid', None)
+    #either "standard question" or "legislation parse"
     template = request.POST.get('template', None)
     session = Session.objects.get(guid = guid)
     transcript = Messages.transcript(session)
@@ -93,6 +96,7 @@ def prompt(request):
     else: 
         prompt = {"user_message":prompt}
    
+    #need to check if this works for the whatsapp chats
     managedata.add_message(guid, prompt, role, model)
     
     answer = transformerhub.get_answer(prompt, model, transcript, template)
