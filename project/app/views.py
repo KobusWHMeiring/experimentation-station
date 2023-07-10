@@ -2,9 +2,10 @@ from django.shortcuts import render
 from app import transformerhub
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
-from app import managedata, whatsapp, teamhelper
+from app import managedata, whatsapp, teamhelper, embeddings
 from app.models import Messages, Session
 import json
+import re
 # Create your views here.
 
 def home(request):
@@ -109,7 +110,30 @@ def prompt(request):
     
     return JsonResponse(response)
     
+
+@csrf_exempt
+def upload(request):
+    url = request.POST.get('url', None)
+    print("url uploaded is")
+    print(url)
+    raw_doc = embeddings.parse_pdf(url)
+    chunks = embeddings.split_text(raw_doc)
+    print(type(chunks))
+    print(type(chunks[1]))
+    return_doc = []
+    return_str = ""
+    for i in range(0, len(chunks)):
+        cleaned_text = re.sub(r"\n+", " ", str(chunks[i]))  # Remove consecutive newlines
+        cleaned_text = re.sub(r"\s{2,}", " ", cleaned_text)  # Replace multiple spaces with a single space
+        cleaned_text = re.sub(r"\.{2,}", ".", cleaned_text)
+        return_doc.append(cleaned_text)
+        print("nr run")
+        print(i)
     
+    print(return_doc)
     
+    response = {"answer": return_doc}
+    
+    return JsonResponse(response)
     
     

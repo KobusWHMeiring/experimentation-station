@@ -42,6 +42,18 @@ let guid = "{{guid}}"
             </div>
             <div class='output-space'>
                 <div class = output-frame>
+                    <dialog id = upload-dialog>
+                        <div>
+                            <div><span id = "upload-text">What do you want to upload</span>
+                            <input type = "text" id = "upload-url">
+                            <button onclick = "uploadDoc()">Upload and Parse</button>
+                        </div>
+                        <div class = "dialog-cancel">
+                             <button onclick="hideUpload()">Cancel</button>
+                        </div>
+                           
+                        </div>
+                    </dialog>
                     <div class='output' id='output'></div>
                 </div>
                 
@@ -85,6 +97,7 @@ let guid = "{{guid}}"
                     </div>
                     
                 </div>
+                <div><button onclick="showUpload()">Upload</button></div>
             </div>
             <div class='input-space'>
                 <div class='input-bar-container'>

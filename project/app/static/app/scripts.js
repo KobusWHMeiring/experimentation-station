@@ -20,7 +20,16 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("sentiment-analysis-container").classList.add("hidden")
         }
       });
+      var inputTextArea = document.getElementById("input");
+  
+      inputTextArea.addEventListener("keydown", function(event) {
+        if (event.ctrlKey && event.key == "Enter") {
+          send();
+        }
+      });
+
 })
+
 
 function handleKeyDown(event) {
   if (event.key === "Enter") {
@@ -74,6 +83,44 @@ function sendWhatsapp(message){
     $.ajax(config);
 }
 
+function showUpload(){
+    uploadDialog = document.getElementById("upload-dialog");
+    uploadDialog.showModal();
+}
+
+function hideUpload(){
+    uploadDialog = document.getElementById("upload-dialog");
+    uploadDialog.close("something");
+}
+
+function uploadSuccess(input){
+    upload_text = document.getElementById("upload-text");
+    upload_text.value = "Success man, nicely done brobean"
+    console.log('input', input)
+    displayResponseMessage(input)
+}
+
+function uploadDoc(){
+    hideUpload()
+    let url = document.getElementById("upload-url").value
+
+    let content = 
+        {
+            "url":url
+        }
+    let config = 
+        {
+            type: "POST",
+            url:  '/upload/',
+            data: content,
+            dataType: 'json',
+            success: uploadSuccess
+        };
+        
+    $.ajax(config);
+}
+
+
 function send(){
 
     let prompt_content = document.getElementById("input").value
@@ -112,13 +159,8 @@ function send(){
     }   
 }
 
-var inputTextArea = document.getElementById("input");
 
-inputTextArea.addEventListener("keydown", function (event) {
-  if (event.ctrlKey && event.key == "Enter") {
-    send();
-  }
-});
+
 
 function displaySettings(model){
     model = "Selected Model: " + model
