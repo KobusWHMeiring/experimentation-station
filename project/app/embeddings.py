@@ -1,6 +1,5 @@
 import pandas as pd
-from langchain.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import Pinecone
 import os
@@ -9,44 +8,15 @@ import openai
 from tqdm.auto import tqdm  # this is our progress bar
 import uuid
 import re
+from app import doctools
 
 
 
 #langchain's embeddings model setup
 
-def parse_pdf(doc_url):
-    #parses the pdf by page
-    loader = PyPDFLoader(doc_url)
-    raw_doc = loader.load()
-    """  cleaned_docs = []
-    for doc in raw_doc:
-        doc_str = str(doc)
-        cleaned_text = re.sub(r"\n+", " ", doc_str)  # Remove consecutive newlines
-        cleaned_text = re.sub(r"\s{2,}", " ", cleaned_text)  # Replace multiple spaces with a single space
- 
-        
-        cleaned_docs.append(cleaned_text) """
-    
-
-    return(raw_doc)
-   
-
-def split_text(raw_doc):
-    recursive_text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size = 2000,
-        chunk_overlap  = 200,
-        length_function = len,
-        add_start_index = True,
-    )
-    recursive_docs = recursive_text_splitter.split_documents(raw_doc)
-
-    
-    return(recursive_docs)
-
-def embed(index_name, recursive_docs):
+def embed_pinecone(index_name, recursive_docs):
     index_name = 'experimentation-station'
     embeddings = OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY"))
-    
     #creating pinecone connection 
     pinecone.init(      
     	api_key=os.getenv("pinecone_api_key"),      
@@ -56,10 +26,18 @@ def embed(index_name, recursive_docs):
     created_index = Pinecone.from_documents(recursive_docs, embeddings, index_name=index_name) 
     return(created_index)
 
+def embed_openai(docs):
+    text = ""
+    for doc in docs:
+        text += doc
+    model="text-embedding-ada-002"
+    return openai.Embedding.create(input = [text], model=model)['data'][0]['embedding']
 
 
 
-def search_doc(query):
+
+
+def search_doc_pinecone(query):
     pinecone.init(      
     	api_key=os.getenv("pinecone_api_key"),      
     	environment='asia-southeast1-gcp-free'      

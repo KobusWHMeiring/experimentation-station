@@ -38,9 +38,6 @@ function handleKeyDown(event) {
   }
 }
 
-
-
-
 function sendUserMessage(prompt_content,system_prompt, model, template){
   
     displaySettings(model)
@@ -158,9 +155,6 @@ function send(){
         response = sendUserMessage(prompt_content, system_message, model, template)
     }   
 }
-
-
-
 
 function displaySettings(model){
     model = "Selected Model: " + model

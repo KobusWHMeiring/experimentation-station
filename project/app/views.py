@@ -2,7 +2,7 @@ from django.shortcuts import render
 from app import transformerhub
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
-from app import managedata, whatsapp, teamhelper, embeddings
+from app import managedata, whatsapp, teamhelper, embeddings, doctools
 from app.models import Messages, Session
 import json
 import re
@@ -116,23 +116,21 @@ def upload(request):
     url = request.POST.get('url', None)
     print("url uploaded is")
     print(url)
-    raw_doc = embeddings.parse_pdf(url)
-    chunks = embeddings.split_text(raw_doc)
-    print(type(chunks))
-    print(type(chunks[1]))
-    return_doc = []
-    return_str = ""
-    for i in range(0, len(chunks)):
-        cleaned_text = re.sub(r"\n+", " ", str(chunks[i]))  # Remove consecutive newlines
-        cleaned_text = re.sub(r"\s{2,}", " ", cleaned_text)  # Replace multiple spaces with a single space
-        cleaned_text = re.sub(r"\.{2,}", ".", cleaned_text)
-        return_doc.append(cleaned_text)
-        print("nr run")
-        print(i)
+    title = doctools.get_text_after_word(url, "act")
+    title = doctools.remove_slashes(title)
+    print(title)
+    raw_doc = doctools.parse_pdf(url)
     
-    print(return_doc)
+    raw_chunks = doctools.split_text(raw_doc)
+    clean_chunks = doctools.clean_content(raw_chunks)
+    embedding = embeddings.embed_openai(clean_chunks)
+    doctools.write_list_to_txt(title, "new", embedding)
+    doctools.write_list_to_csv(title, embedding)
     
-    response = {"answer": return_doc}
+    
+    #print(embedding)
+   
+    response = {"answer": "yoo"}
     
     return JsonResponse(response)
     
