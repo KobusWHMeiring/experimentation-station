@@ -73,9 +73,6 @@ def send_whatsapp(request):
     
     return(HttpResponse(back))
     
-    
-    
-
 
 @csrf_exempt
 def prompt(request):
@@ -83,10 +80,13 @@ def prompt(request):
     prompt = request.POST.get('prompt', None)
     #This field is always there Question-answer, not present for other prompt types.
     system_message =  request.POST.get('system_prompt', "")
+    
     model = request.POST.get('model', None)
     guid = request.POST.get('guid', None)
-    #either "standard question" or "legislation parse"
+    
+    #either "standard question",  "legislation parse", or "Feature Discovery"
     template = request.POST.get('template', None)
+    
     session = Session.objects.get(guid = guid)
     transcript = Messages.transcript(session)
     
@@ -116,16 +116,19 @@ def upload(request):
     url = request.POST.get('url', None)
     print("url uploaded is")
     print(url)
-    title = doctools.get_text_after_word(url, "act")
-    title = doctools.remove_slashes(title)
-    print(title)
+
     raw_doc = doctools.parse_pdf(url)
     
-    raw_chunks = doctools.split_text(raw_doc)
-    clean_chunks = doctools.clean_content(raw_chunks)
-    embedding = embeddings.embed_openai(clean_chunks)
-    doctools.write_list_to_txt(title, "new", embedding)
-    doctools.write_list_to_csv(title, embedding)
+    doctools.write_text_to_csv(raw_doc)
+    
+    #raw_chunks = doctools.split_text(raw_doc)
+    #clean_chunks = doctools.clean_content(raw_chunks)
+    #doctools.write_list_to_txt(title, "replace", clean_chunks)
+    #doctools.write_list_to_csv(title, "replace", clean_chunks)
+    #doctools.read_csv_as_df(title)
+    #embedding = embeddings.embed_openai(clean_chunks)
+    
+    
     
     
     #print(embedding)

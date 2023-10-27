@@ -1,0 +1,1 @@
+This is the broad description of the new feature that we have so far: {user_message} <REQUEST> {/user_message}.   Please think of 10 questions about the feature that would need to be answered to effectively set up user stories for this feature.  Only ask the top 5 questions.
